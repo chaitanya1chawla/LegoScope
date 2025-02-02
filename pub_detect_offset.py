@@ -7,7 +7,7 @@ import numpy as np
 import torch
 import time
 from collections import deque
-import rospy
+import rclpy
 from std_msgs.msg import Float32MultiArray
 from scipy.optimize import least_squares
 from find_cam import find_cam
@@ -229,13 +229,14 @@ else:
 
 filtered_center = np.array([0,0])
 
-rospy.init_node('tool_offset_publisher', anonymous=True)
-tool_offset_pub = rospy.Publisher('tool_offset', Float32MultiArray, queue_size=10)
+rclpy.init()
+node = rclpy.create_node('tool_offset_publisher')
+tool_offset_pub = node.create_publisher(Float32MultiArray, 'tool_offset', 10)
 
 # Set the loop rate (e.g., 10 Hz)
-rate = rospy.Rate(20)
+rate = node.create_rate(20)
 
-while not rospy.is_shutdown():
+while node.ok():
     # Get the detected offset
     offset = compute_offset(camera, model)
     print(offset)

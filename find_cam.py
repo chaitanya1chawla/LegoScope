@@ -5,13 +5,16 @@ def find_cam(display = False):
 
     for i in range(10):
         try:
-            cap = cv2.VideoCapture(i)
+            cap = cv2.VideoCapture(i, cv2.CAP_V4L2)
+            cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'))
+            cap.set(cv2.CAP_PROP_FPS, 10)
             if cap is not None and cap.isOpened():
+                print(f"camera {i} is opened")
                 openCvVidCapIds.append(i)
                 ret, og_frame = cap.read()
                 # og_frame = cv2.imread("sample.jpg")
                 if display:
-                    cv2.imshow(f"camera {i}", og_frame)
+                    cv2.imshow(f"camera {0}", og_frame)
             # end if
         except:
             pass
@@ -24,4 +27,4 @@ def find_cam(display = False):
     return openCvVidCapIds
 
 if __name__ == "__main__":
-    find_cam()
+    find_cam(True)
