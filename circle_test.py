@@ -9,8 +9,9 @@ from collections import deque
 from scipy.optimize import least_squares
 from circle_fit import taubinSVD
 from scipy.optimize import minimize
-last_mos = np.array([0,0])
+last_mos = np.array([0,0,0])
 last_mos_queue = deque(maxlen=10)
+TOOL_CENTER = np.array([180,291])
 def process_results2(results):
     transform = np.array([0.01, 0.01, 1])
     global last_mos
@@ -244,21 +245,20 @@ def find_intersections(centers, y_top, y_bottom):
 
     return np.asarray([intersection1, intersection2])
 
-def process_results(result, conf):
+def process_results(result, conf, angle):
     transform = np.array([0.01, 0.01, 1])
     global last_mos_queue
     
     # Convert the new measurement to CPU and append to the queue
     if conf > 0.5:
-        new_measurement = result
+        new_measurement = np.concatenate([result, [angle]])
         last_mos_queue.append(new_measurement)
         
         # Compute the rolling average
         rolling_average = np.mean(np.array(last_mos_queue), axis=0)
 
         output = np.zeros(3)
-        output[:2] = rolling_average
-        output[2] = conf
+        output[:3] = rolling_average
 
         print("center: ", rolling_average, "with confidence", conf)
             
@@ -266,8 +266,7 @@ def process_results(result, conf):
     else:
         return None
     
-
-def compute_offset(camera, model, fx = 1000 , fy = 1000, z = 30.0):
+def compute_offset(camera, model, fx = 1100 , fy = 1100, z = 30.0):
     '''
     Arguments: 
     camera to read from, and yolo keypoint model to use
@@ -275,38 +274,41 @@ def compute_offset(camera, model, fx = 1000 , fy = 1000, z = 30.0):
     Outputs:
     [x,y,confidence] if detected, None otherwise
     '''
+    t0 = time.perf_counter()
     ret, og_frame = camera.read()
-    og_frame = cv2.imread("sample.jpg")
-    h, w, c = og_frame.shape
-    # if ret:
-    #     
-    # else:
-    #     print("read frame file")
-    #     return None
+    # og_frame = cv2.imread("sample.jpg")
+    if ret:
+        h, w, c = og_frame.shape
+    else:
+        print("read frame file")
+        return None
     start_w = (w - 480) // 2
     end_w = start_w + 480
     
     # Crop the middle section
-    og_frame = cv2.resize(og_frame, [640,480])
+    # og_frame = cv2.resize(og_frame, [640,480])
     og_frame = og_frame[:, start_w:end_w, :]
-    results = model.predict(og_frame, show = False, verbose = False)
+    t1 = time.perf_counter()
+    results = model.predict(og_frame, show = True, verbose = False)
+    
+    t2 = time.perf_counter()
+    if results[0].masks is None:
+        print("No Studs detected")
+        return None
     mask = results[0].masks.xy
     conf = torch.min(results[0].boxes.conf).to('cpu').item()
-    
+    if (len(results[0].masks) != 2):
+        print(len(results[0].masks), " studs detected, abort computing offset")
+        return None
     segments = np.zeros(og_frame.shape[:2])
     centers = []
     radiuses = []
     for i in range(min(2, len(mask))):
-        cv2.fillPoly(segments, [mask[i].astype(np.int32)], 255)
         (x, y), radius = cv2.minEnclosingCircle(mask[i])
-    
-    # Draw the circle on the segments array
         center = (int(x), int(y))  # Convert center coordinates to integers
         radius = int(radius)       # Convert radius to an integer
         centers.append(center)
         radiuses.append(radius)
-        cv2.circle(og_frame, center, radius, [0,0,200], 2)
-    # cv2.line(og_frame, centers[0], centers[1], [200,200,0], 2)#line1
     top_stud_mask = mask[np.argmax([np.median(mask[0][:,1]), np.median(mask[1][:,1])])] #top stud is the one with higher Y value, which is at the BOTTOM in image
     bottom_stud_mask = mask[np.argmin([np.median(mask[0][:,1]), np.median(mask[1][:,1])])]
     y_top = np.min(top_stud_mask[:,1]).astype(int)
@@ -317,50 +319,40 @@ def compute_offset(camera, model, fx = 1000 , fy = 1000, z = 30.0):
     else:
         top_stud_side_x = np.min(top_stud_mask[:,0]).astype(int)
         bottom_stud_side_x = np.min(bottom_stud_mask[:,0]).astype(int)
-    cv2.line(og_frame, [0,int(y_top)], [479, int(y_top)], [200,200,0],2)#line2
-    cv2.line(og_frame, [0,int(y_bottom)], [479, int(y_bottom)], [200,200,0],2)#line3
-    cv2.line(og_frame, [top_stud_side_x,479], [top_stud_side_x,y_top], [200,200,0],2)#line2
-    cv2.line(og_frame, [bottom_stud_side_x,y_bottom], [bottom_stud_side_x,0], [200,200,0],2)#line2
-    intersects = find_intersections(centers, y_top, y_bottom)
-    # cv2.line(og_frame, intersects[0], intersects[1], [200,0,100], 3)
-    target_center = np.average(intersects, axis=0)
-    xc, yc, r, sig = taubinSVD(top_stud_mask)
-    cv2.circle(og_frame, np.array([xc, yc]).astype(int),int(r), [0,0,0], 2)
-    xc, yc, r, sig= taubinSVD(bottom_stud_mask)
-    cv2.circle(og_frame, np.array([xc, yc]).astype(int),int(r), [0,0,0], 2)
-    top_stud_center_adj, top_stud_radius_adj = min_enclosing_circle_tangent_to_lines2(top_stud_mask, top_stud_side_x, y_top)
-    bottom_stud_center_adj, bottom_stud_radius_adj = min_enclosing_circle_tangent_to_lines2(bottom_stud_mask, bottom_stud_side_x, y_bottom)
-    target_center_adj = np.mean([top_stud_center_adj, bottom_stud_center_adj], axis = 0)
-    naive_center = np.mean(centers, axis = 0)
 
-    studs_diff = top_stud_center_adj - bottom_stud_center_adj
-    angle = np.arctan2(studs_diff[1], studs_diff[0])
-    print(angle)
+    # intersects = find_intersections(centers, y_top, y_bottom)
+    # target_center = np.average(intersects, axis=0)
+
+    top_stud_center_adj, top_stud_radius_adj = min_enclosing_circle_tangent_to_lines(top_stud_mask, top_stud_side_x, y_top)
+    bottom_stud_center_adj, bottom_stud_radius_adj = min_enclosing_circle_tangent_to_lines(bottom_stud_mask, bottom_stud_side_x, y_bottom)
+    target_center_adj = np.mean([top_stud_center_adj, bottom_stud_center_adj], axis = 0)
+
     cv2.circle(og_frame, top_stud_center_adj,top_stud_radius_adj, [0,230,0], 2)
     cv2.circle(segments, top_stud_center_adj,top_stud_radius_adj, 150, 2)
     cv2.circle(og_frame, bottom_stud_center_adj,bottom_stud_radius_adj, [0,230,0], 2)
     cv2.circle(og_frame, target_center_adj.astype(np.int64), 6, [0,230,0], -1)
-    cv2.circle(og_frame, naive_center.astype(np.int64), 6, [0,0,230], -1)
-    cv2.imshow("masks", segments)
     cv2.imshow("og_frame", og_frame)
-    cv2.waitKey(100)
+    cv2.waitKey(1)
+    t3 = time.perf_counter()
 
-    output = process_results(target_center_adj, conf)
-    output[:2] -= np.array([215,291])#diff from center
+    studs_diff = top_stud_center_adj - bottom_stud_center_adj
+    angle = np.arctan2(studs_diff[1], studs_diff[0])
+    angle -= 1.5143
+    output = process_results(target_center_adj, conf,angle)
+    if output is None:
+        print("low confidence, ignoring offset")
+        return None
+    output[:2] -= TOOL_CENTER#diff from center
     output[:2] *= z
     output[:2] /= np.array([fx, fy])
-    if output[2] > 0.7:
-        return output[:2] / 1000 #mm to meter
-    else:
-        return None
-    # except:
-    #     print("error")
-    #     return None
+    output[0] *= -1 #x is reversed
+    output[1] *= -1 
+    return np.concatenate([output[:2] / 1000, [output[2]]]) #mm to meter
+
 
     
-
 model = YOLO("studs-seg2.pt")
-camera = cv2.VideoCapture(5)
+camera = cv2.VideoCapture(4)
 filtered_center = np.array([0,0])
 
 # Set the loop rate (e.g., 10 Hz)

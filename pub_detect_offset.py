@@ -11,9 +11,9 @@ import rclpy
 from std_msgs.msg import Float32MultiArray
 from scipy.optimize import least_squares
 from find_cam import find_cam
-last_mos = np.array([0,0])
-last_mos_queue = deque(maxlen=3)
-TOOL_CENTER = np.array([169,291])
+last_mos = np.array([0,0,0])
+last_mos_queue = deque(maxlen=10)
+TOOL_CENTER = np.array([180,291])
 def process_results2(results):
     transform = np.array([0.01, 0.01, 1])
     global last_mos
@@ -114,21 +114,20 @@ def find_intersections(centers, y_top, y_bottom):
 
     return np.asarray([intersection1, intersection2])
 
-def process_results(result, conf):
+def process_results(result, conf, angle):
     transform = np.array([0.01, 0.01, 1])
     global last_mos_queue
     
     # Convert the new measurement to CPU and append to the queue
     if conf > 0.5:
-        new_measurement = result
+        new_measurement = np.concatenate([result, [angle]])
         last_mos_queue.append(new_measurement)
         
         # Compute the rolling average
         rolling_average = np.mean(np.array(last_mos_queue), axis=0)
 
         output = np.zeros(3)
-        output[:2] = rolling_average
-        output[2] = conf
+        output[:3] = rolling_average
 
         print("center: ", rolling_average, "with confidence", conf)
             
@@ -191,8 +190,8 @@ def compute_offset(camera, model, fx = 1100 , fy = 1100, z = 30.0):
         top_stud_side_x = np.min(top_stud_mask[:,0]).astype(int)
         bottom_stud_side_x = np.min(bottom_stud_mask[:,0]).astype(int)
 
-    intersects = find_intersections(centers, y_top, y_bottom)
-    target_center = np.average(intersects, axis=0)
+    # intersects = find_intersections(centers, y_top, y_bottom)
+    # target_center = np.average(intersects, axis=0)
 
     top_stud_center_adj, top_stud_radius_adj = min_enclosing_circle_tangent_to_lines(top_stud_mask, top_stud_side_x, y_top)
     bottom_stud_center_adj, bottom_stud_radius_adj = min_enclosing_circle_tangent_to_lines(bottom_stud_mask, bottom_stud_side_x, y_bottom)
@@ -202,7 +201,8 @@ def compute_offset(camera, model, fx = 1100 , fy = 1100, z = 30.0):
 
     studs_diff = top_stud_center_adj - bottom_stud_center_adj
     angle = np.arctan2(studs_diff[1], studs_diff[0])
-    output = process_results(target_center_adj, conf)
+    angle -= 1.5143
+    output = process_results(target_center_adj, conf,angle)
     if output is None:
         print("low confidence, ignoring offset")
         return None
@@ -211,10 +211,7 @@ def compute_offset(camera, model, fx = 1100 , fy = 1100, z = 30.0):
     output[:2] /= np.array([fx, fy])
     output[0] *= -1 #x is reversed
     output[1] *= -1 
-    if output[2] > 0.7:
-        return np.concatenate([output[:2] / 1000, [angle]]) #mm to meter
-    else:
-        return None
+    return np.concatenate([output[:2] / 1000, output[2]]) #mm to meter
     # except Exception as e:
     #     print("error: ", e)
     #     return None
