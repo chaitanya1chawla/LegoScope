@@ -1,0 +1,36 @@
+[0.006s] Invoking command in '/home/chaitanya/repos/LegoScope/build/ros1_bridge': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/chaitanya/Downloads/ros2-linux:/opt/ros/humble CONDA_PROMPT_MODIFIER=(base) /usr/bin/cmake /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge -DBUILD_TESTING=FALSE -DCMAKE_INSTALL_PREFIX=/home/chaitanya/repos/LegoScope/install/ros1_bridge
+[0.014s] -- Found rmw: 6.1.2 (/opt/ros/humble/share/rmw/cmake)
+[0.116s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[0.125s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.127s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.131s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.135s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.143s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.164s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.165s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.233s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.271s] -- Checking for module 'roscpp'
+[0.273s] --   No package 'roscpp' found
+[0.273s] [33mCMake Warning at CMakeLists.txt:34 (message):
+[0.273s]   Failed to find ROS 1 roscpp, skipping...
+[0.273s] 
+[0.273s] [0m
+[0.287s] Traceback (most recent call last):
+[0.287s]   File "/opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>
+[0.287s]     from catkin_pkg.package import parse_package_string
+[0.287s] ModuleNotFoundError: No module named 'catkin_pkg'
+[0.289s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):
+[0.290s]   execute_process(/home/chaitanya/miniforge3/bin/python3
+[0.290s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py
+[0.290s]   /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge/package.xml
+[0.290s]   /home/chaitanya/repos/LegoScope/build/ros1_bridge/ament_cmake_core/package.cmake)
+[0.290s]   returned error code 1
+[0.290s] Call Stack (most recent call first):
+[0.290s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)
+[0.290s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)
+[0.290s]   CMakeLists.txt:36 (ament_package)
+[0.290s] 
+[0.290s] [0m
+[0.290s] -- Configuring incomplete, errors occurred!
+[0.290s] See also "/home/chaitanya/repos/LegoScope/build/ros1_bridge/CMakeFiles/CMakeOutput.log".
+[0.296s] Invoked command in '/home/chaitanya/repos/LegoScope/build/ros1_bridge' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/chaitanya/Downloads/ros2-linux:/opt/ros/humble CONDA_PROMPT_MODIFIER=(base) /usr/bin/cmake /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge -DBUILD_TESTING=FALSE -DCMAKE_INSTALL_PREFIX=/home/chaitanya/repos/LegoScope/install/ros1_bridge

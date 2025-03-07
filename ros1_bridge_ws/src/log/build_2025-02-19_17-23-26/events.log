@@ -1,0 +1,72 @@
+[0.000000] (-) TimerEvent: {}
+[0.000411] (ros1_bridge) JobQueued: {'identifier': 'ros1_bridge', 'dependencies': OrderedDict()}
+[0.000557] (ros1_bridge) JobStarted: {'identifier': 'ros1_bridge'}
+[0.005843] (ros1_bridge) JobProgress: {'identifier': 'ros1_bridge', 'progress': 'cmake'}
+[0.006350] (ros1_bridge) Command: {'cmd': ['/usr/bin/cmake', '/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge', '-DBUILD_TESTING=FALSE', '-DCMAKE_INSTALL_PREFIX=/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/install/ros1_bridge'], 'cwd': '/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('LESSOPEN', '| /usr/bin/lesspipe %s'), ('CONDA_PROMPT_MODIFIER', '(base)'), ('LANGUAGE', 'en_IN:en'), ('USER', 'chaitanya'), ('XDG_SESSION_TYPE', 'x11'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/home/chaitanya/Downloads/ros2-linux/opt/rviz_ogre_vendor/lib:/home/chaitanya/Downloads/ros2-linux/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib::/home/chaitanya/.mujoco/mujoco210/bin:/home/chaitanya/.mujoco/mujoco210/bin:/home/chaitanya/.mujoco/mujoco210/bin'), ('HOME', '/home/chaitanya'), ('CONDA_SHLVL', '1'), ('OLDPWD', '/home/chaitanya/repos/LegoScope/ros1_bridge_ws'), ('DESKTOP_SESSION', 'ubuntu'), ('NVM_BIN', '/home/chaitanya/.nvm/versions/node/v20.17.0/bin'), ('NVM_INC', '/home/chaitanya/.nvm/versions/node/v20.17.0/include/node'), ('GIO_LAUNCHED_DESKTOP_FILE', '/usr/share/applications/terminator.desktop'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('ROS_IP', '172.26.75.241'), ('MANAGERPID', '2062'), ('SYSTEMD_EXEC_PID', '2358'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('_CE_M', ''), ('TERMINATOR_DBUS_NAME', 'net.tenshu.Terminator23558193cd9818af7fe4d2c2f5bd9d00f'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '10852'), ('NVM_DIR', '/home/chaitanya/.nvm'), ('COLCON_PREFIX_PATH', '/home/chaitanya/Downloads/ros2-linux'), ('ROS_DISTRO', 'humble'), ('GTK_IM_MODULE', 'ibus'), ('LOGNAME', 'chaitanya'), ('JOURNAL_STREAM', '8:26219'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('PKG_CONFIG_PATH', '/home/chaitanya/Downloads/ros2-linux/lib/x86_64-linux-gnu/pkgconfig:/home/chaitanya/Downloads/ros2-linux/lib/pkgconfig'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'chaitanya'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('_CE_CONDA', ''), ('ROS_LOCALHOST_ONLY', '0'), ('WINDOWPATH', '2'), ('PATH', '/home/chaitanya/Downloads/ros2-linux/bin:/opt/ros/humble/bin:/home/chaitanya/google-cloud-sdk/bin:/home/chaitanya/.nvm/versions/node/v20.17.0/bin:/home/chaitanya/miniforge3/bin:/home/chaitanya/miniforge3/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/thinkpad-t14-gen-4:@/tmp/.ICE-unix/2332,unix/thinkpad-t14-gen-4:/tmp/.ICE-unix/2332'), ('INVOCATION_ID', '27fe24bae0da4e3cb4e88c9b23a51984'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('DISPLAY', ':1'), ('TERMINATOR_DBUS_PATH', '/net/tenshu/Terminator2'), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('IBUS_DISABLE_SNOOPER', '1'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('XML_CATALOG_FILES', 'file:///home/chaitanya/miniforge3/etc/xml/catalog file:///etc/xml/catalog'), ('ROS_DOMAIN_ID', '0'), ('AMENT_PREFIX_PATH', '/home/chaitanya/Downloads/ros2-linux:/opt/ros/humble'), ('CONDA_PYTHON_EXE', '/home/chaitanya/miniforge3/bin/python'), ('SHELL', '/usr/bin/fish'), ('TERMINATOR_UUID', 'urn:uuid:10653caa-83c6-4413-9d86-1be47f9d50e0'), ('QT_ACCESSIBILITY', '1'), ('ROS_MASTER_URI', 'https://172.26.75.241:11311'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('CONDA_DEFAULT_ENV', 'base'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge'), ('LC_ALL', 'en_US.UTF-8'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('CONDA_EXE', '/home/chaitanya/miniforge3/bin/conda'), ('NVM_CD_FLAGS', ''), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/chaitanya/Downloads/ros2-linux/local/lib/python3.10/dist-packages:/home/chaitanya/Downloads/ros2-linux/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('CONDA_PREFIX', '/home/chaitanya/miniforge3'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/chaitanya/Downloads/ros2-linux:/opt/ros/humble')]), 'shell': False}
+[0.043575] (ros1_bridge) StdoutLine: {'line': b'-- The C compiler identification is GNU 11.4.0\n'}
+[0.079251] (ros1_bridge) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 11.4.0\n'}
+[0.084294] (ros1_bridge) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.100086] (-) TimerEvent: {}
+[0.129892] (ros1_bridge) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.134816] (ros1_bridge) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/cc - skipped\n'}
+[0.135017] (ros1_bridge) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.135242] (ros1_bridge) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.137658] (ros1_bridge) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.189049] (ros1_bridge) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.196307] (ros1_bridge) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/c++ - skipped\n'}
+[0.196440] (ros1_bridge) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.196821] (ros1_bridge) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.198742] (ros1_bridge) StdoutLine: {'line': b'-- Found rmw: 6.1.2 (/opt/ros/humble/share/rmw/cmake)\n'}
+[0.200250] (-) TimerEvent: {}
+[0.300527] (-) TimerEvent: {}
+[0.400811] (-) TimerEvent: {}
+[0.442755] (ros1_bridge) StdoutLine: {'line': b'-- Found Python3: /home/chaitanya/miniforge3/bin/python3 (found version "3.12.7") found components: Interpreter \n'}
+[0.500912] (-) TimerEvent: {}
+[0.539113] (ros1_bridge) StdoutLine: {'line': b'-- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[0.557169] (ros1_bridge) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[0.560505] (ros1_bridge) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[0.566310] (ros1_bridge) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[0.572331] (ros1_bridge) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.583620] (ros1_bridge) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.600976] (-) TimerEvent: {}
+[0.620506] (ros1_bridge) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[0.623655] (ros1_bridge) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[0.696726] (ros1_bridge) StdoutLine: {'line': b'-- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  \n'}
+[0.701083] (-) TimerEvent: {}
+[0.715880] (ros1_bridge) StdoutLine: {'line': b'-- Found FastRTPS: /opt/ros/humble/include  \n'}
+[0.744145] (ros1_bridge) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[0.750720] (ros1_bridge) StdoutLine: {'line': b'-- Looking for pthread.h\n'}
+[0.799499] (ros1_bridge) StdoutLine: {'line': b'-- Looking for pthread.h - found\n'}
+[0.799823] (ros1_bridge) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD\n'}
+[0.801217] (-) TimerEvent: {}
+[0.846528] (ros1_bridge) StdoutLine: {'line': b'-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success\n'}
+[0.847426] (ros1_bridge) StdoutLine: {'line': b'-- Found Threads: TRUE  \n'}
+[0.887254] (ros1_bridge) StdoutLine: {'line': b'-- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") \n'}
+[0.891854] (ros1_bridge) StdoutLine: {'line': b"-- Checking for module 'roscpp'\n"}
+[0.893556] (ros1_bridge) StdoutLine: {'line': b"--   No package 'roscpp' found\n"}
+[0.893913] (ros1_bridge) StderrLine: {'line': b'\x1b[33mCMake Warning at CMakeLists.txt:34 (message):\n'}
+[0.894105] (ros1_bridge) StderrLine: {'line': b'  Failed to find ROS 1 roscpp, skipping...\n'}
+[0.894199] (ros1_bridge) StderrLine: {'line': b'\n'}
+[0.894284] (ros1_bridge) StderrLine: {'line': b'\x1b[0m\n'}
+[0.901339] (-) TimerEvent: {}
+[0.907866] (ros1_bridge) StderrLine: {'line': b'Traceback (most recent call last):\n'}
+[0.908048] (ros1_bridge) StderrLine: {'line': b'  File "/opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>\n'}
+[0.908143] (ros1_bridge) StderrLine: {'line': b'    from catkin_pkg.package import parse_package_string\n'}
+[0.908228] (ros1_bridge) StderrLine: {'line': b"ModuleNotFoundError: No module named 'catkin_pkg'\n"}
+[0.910110] (ros1_bridge) StderrLine: {'line': b'\x1b[31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):\n'}
+[0.910296] (ros1_bridge) StderrLine: {'line': b'  execute_process(/home/chaitanya/miniforge3/bin/python3\n'}
+[0.910497] (ros1_bridge) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py\n'}
+[0.910605] (ros1_bridge) StderrLine: {'line': b'  /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge/package.xml\n'}
+[0.910693] (ros1_bridge) StderrLine: {'line': b'  /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge/ament_cmake_core/package.cmake)\n'}
+[0.910778] (ros1_bridge) StderrLine: {'line': b'  returned error code 1\n'}
+[0.910859] (ros1_bridge) StderrLine: {'line': b'Call Stack (most recent call first):\n'}
+[0.910939] (ros1_bridge) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)\n'}
+[0.911020] (ros1_bridge) StderrLine: {'line': b'  /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)\n'}
+[0.911101] (ros1_bridge) StderrLine: {'line': b'  CMakeLists.txt:36 (ament_package)\n'}
+[0.911193] (ros1_bridge) StderrLine: {'line': b'\n'}
+[0.911273] (ros1_bridge) StderrLine: {'line': b'\x1b[0m\n'}
+[0.911352] (ros1_bridge) StdoutLine: {'line': b'-- Configuring incomplete, errors occurred!\n'}
+[0.911439] (ros1_bridge) StdoutLine: {'line': b'See also "/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge/CMakeFiles/CMakeOutput.log".\n'}
+[0.918271] (ros1_bridge) CommandEnded: {'returncode': 1}
+[0.930108] (ros1_bridge) JobEnded: {'identifier': 'ros1_bridge', 'rc': 1}
+[0.941009] (-) EventReactorShutdown: {}

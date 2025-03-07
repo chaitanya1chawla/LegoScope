@@ -1,0 +1,34 @@
+-- Found rmw: 6.1.2 (/opt/ros/humble/share/rmw/cmake)
+-- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+-- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+-- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+-- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Checking for module 'roscpp'
+--   No package 'roscpp' found
+[33mCMake Warning at CMakeLists.txt:34 (message):
+  Failed to find ROS 1 roscpp, skipping...
+
+[0m
+Traceback (most recent call last):
+  File "/opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>
+    from catkin_pkg.package import parse_package_string
+ModuleNotFoundError: No module named 'catkin_pkg'
+[31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):
+  execute_process(/home/chaitanya/miniforge3/bin/python3
+  /opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py
+  /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge/package.xml
+  /home/chaitanya/repos/LegoScope/build/ros1_bridge/ament_cmake_core/package.cmake)
+  returned error code 1
+Call Stack (most recent call first):
+  /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)
+  /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)
+  CMakeLists.txt:36 (ament_package)
+
+[0m
+-- Configuring incomplete, errors occurred!
+See also "/home/chaitanya/repos/LegoScope/build/ros1_bridge/CMakeFiles/CMakeOutput.log".

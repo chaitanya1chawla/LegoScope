@@ -1,0 +1,57 @@
+[0.006s] Invoking command in '/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble CONDA_PROMPT_MODIFIER=(base) /usr/bin/cmake /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge -DBUILD_TESTING=FALSE -DCMAKE_INSTALL_PREFIX=/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/install/ros1_bridge
+[0.043s] -- The C compiler identification is GNU 11.4.0
+[0.079s] -- The CXX compiler identification is GNU 11.4.0
+[0.084s] -- Detecting C compiler ABI info
+[0.129s] -- Detecting C compiler ABI info - done
+[0.134s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.135s] -- Detecting C compile features
+[0.135s] -- Detecting C compile features - done
+[0.137s] -- Detecting CXX compiler ABI info
+[0.189s] -- Detecting CXX compiler ABI info - done
+[0.196s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.196s] -- Detecting CXX compile features
+[0.196s] -- Detecting CXX compile features - done
+[0.198s] -- Found rmw: 6.1.2 (/opt/ros/humble/share/rmw/cmake)
+[0.442s] -- Found Python3: /home/chaitanya/miniforge3/bin/python3 (found version "3.12.7") found components: Interpreter 
+[0.539s] -- Found rclcpp: 16.0.11 (/opt/ros/humble/share/rclcpp/cmake)
+[0.557s] -- Found rosidl_generator_c: 3.1.6 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[0.560s] -- Found rosidl_adapter: 3.1.6 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[0.566s] -- Found rosidl_generator_cpp: 3.1.6 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[0.572s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[0.583s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[0.620s] -- Found rmw_implementation_cmake: 6.1.2 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[0.623s] -- Found rmw_fastrtps_cpp: 6.2.7 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[0.696s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[0.715s] -- Found FastRTPS: /opt/ros/humble/include  
+[0.744s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[0.750s] -- Looking for pthread.h
+[0.799s] -- Looking for pthread.h - found
+[0.799s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+[0.846s] -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+[0.847s] -- Found Threads: TRUE  
+[0.887s] -- Found PkgConfig: /usr/bin/pkg-config (found version "0.29.2") 
+[0.891s] -- Checking for module 'roscpp'
+[0.893s] --   No package 'roscpp' found
+[0.893s] [33mCMake Warning at CMakeLists.txt:34 (message):
+[0.894s]   Failed to find ROS 1 roscpp, skipping...
+[0.894s] 
+[0.894s] [0m
+[0.907s] Traceback (most recent call last):
+[0.908s]   File "/opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py", line 22, in <module>
+[0.908s]     from catkin_pkg.package import parse_package_string
+[0.908s] ModuleNotFoundError: No module named 'catkin_pkg'
+[0.910s] [31mCMake Error at /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:95 (message):
+[0.910s]   execute_process(/home/chaitanya/miniforge3/bin/python3
+[0.910s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/package_xml_2_cmake.py
+[0.910s]   /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge/package.xml
+[0.910s]   /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge/ament_cmake_core/package.cmake)
+[0.910s]   returned error code 1
+[0.910s] Call Stack (most recent call first):
+[0.910s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package_xml.cmake:49 (_ament_package_xml)
+[0.911s]   /opt/ros/humble/share/ament_cmake_core/cmake/core/ament_package.cmake:63 (ament_package_xml)
+[0.911s]   CMakeLists.txt:36 (ament_package)
+[0.911s] 
+[0.911s] [0m
+[0.911s] -- Configuring incomplete, errors occurred!
+[0.911s] See also "/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge/CMakeFiles/CMakeOutput.log".
+[0.918s] Invoked command in '/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/build/ros1_bridge' returned '1': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/humble CONDA_PROMPT_MODIFIER=(base) /usr/bin/cmake /home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/ros1_bridge -DBUILD_TESTING=FALSE -DCMAKE_INSTALL_PREFIX=/home/chaitanya/repos/LegoScope/ros1_bridge_ws/src/install/ros1_bridge

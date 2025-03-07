@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "LegoScope",
+			"path": "."
+		},
+		{
+			"name": "lego_data",
+			"path": "../../Downloads/lego_data"
+		}
+	],
+	"settings": {}
+}

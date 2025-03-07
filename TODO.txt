@@ -1,0 +1,1 @@
+add center crop, and only detect 2 studs.

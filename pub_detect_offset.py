@@ -11,29 +11,35 @@ import rclpy
 from std_msgs.msg import Float32MultiArray
 from scipy.optimize import least_squares
 from find_cam import find_cam
+
+
 last_mos = np.array([0,0,0])
 last_mos_queue = deque(maxlen=10)
 TOOL_CENTER = np.array([180,291])
-def process_results2(results):
-    transform = np.array([0.01, 0.01, 1])
-    global last_mos
-    if len(results) == 1:
-        result = results[0]
-        if not (results[0].keypoints.conf is None):
-            mid_of_studs = results[0].keypoints.xy[0,1,:]
-            mid_of_studs_conf = results[0].keypoints.conf[0,1]
-            last_mos = 0.8 * last_mos + 0.2 * np.array(mid_of_studs.to('cpu'))
-            output = np.zeros(3)
-            output[:2] = last_mos
-            output[2] = mid_of_studs_conf.cpu().item()
-            #output = output @ transform.T
-            print("center: ", last_mos, "with confidence", mid_of_studs_conf.cpu().item())
-        else:
-            print("no lego keypoints detected")
-            output = np.zeros(3)
-        
-        return output
 
+
+# def process_results2(results):
+#     transform = np.array([0.01, 0.01, 1])
+#     global last_mos
+#     if len(results) == 1:
+#         result = results[0]
+#         if not (results[0].keypoints.conf is None):
+#             mid_of_studs = results[0].keypoints.xy[0,1,:]
+#             mid_of_studs_conf = results[0].keypoints.conf[0,1]
+#             last_mos = 0.8 * last_mos + 0.2 * np.array(mid_of_studs.to('cpu'))
+#             output = np.zeros(3)
+#             output[:2] = last_mos
+#             output[2] = mid_of_studs_conf.cpu().item()
+#             #output = output @ transform.T
+#             print("center: ", last_mos, "with confidence", mid_of_studs_conf.cpu().item())
+#         else:
+#             print("no lego keypoints detected")
+#             output = np.zeros(3)
+        
+#         return output
+
+
+########### TODO: Replace with cv2.fitEllipse ######################
 def min_enclosing_circle_tangent_to_lines(contour, line_x, line_y):
     """
     Find the minimum enclosing circle of a contour that is tangent to both a vertical and a horizontal line.
@@ -47,7 +53,7 @@ def min_enclosing_circle_tangent_to_lines(contour, line_x, line_y):
         tuple: (center, radius) where center is (x, y) and radius is the circle radius.
     """
     # Find the initial minimum enclosing circle
-    (cx, cy), radius = cv2.minEnclosingCircle(contour)
+    (cx, cy), radius = cv2.minEnclosingCircle(contour)  
     # Adjust the x-coordinate of the circle center for vertical line tangency
     if cx < line_x:
         cx = line_x -radius
@@ -75,44 +81,44 @@ def min_enclosing_circle_tangent_to_lines(contour, line_x, line_y):
     # Return the adjusted circle center and radius
     return np.array((cx, cy)).astype(int), int(radius)
 
-def find_intersections(centers, y_top, y_bottom):
-    """
-    Calculate the intersection points of Line1 with horizontal lines at y_top and y_bottom.
+# def find_intersections(centers, y_top, y_bottom):
+#     """
+#     Calculate the intersection points of Line1 with horizontal lines at y_top and y_bottom.
     
-    Parameters:
-        centers (list of tuples): Two points [(x0, y0), (x1, y1)] defining Line1.
-        y_top (int): Y-coordinate of the horizontal line (Line2).
-        y_bottom (int): Y-coordinate of the horizontal line (Line3).
+#     Parameters:
+#         centers (list of tuples): Two points [(x0, y0), (x1, y1)] defining Line1.
+#         y_top (int): Y-coordinate of the horizontal line (Line2).
+#         y_bottom (int): Y-coordinate of the horizontal line (Line3).
     
-    Returns:
-        tuple: Intersection points ((x_intersect1, y_top), (x_intersect2, y_bottom)).
-    """
-    # Extract points for Line1
-    (x0, y0), (x1, y1) = centers
+#     Returns:
+#         tuple: Intersection points ((x_intersect1, y_top), (x_intersect2, y_bottom)).
+#     """
+#     # Extract points for Line1
+#     (x0, y0), (x1, y1) = centers
 
-    # Calculate slope (m1) and intercept (c1) of Line1
-    if x1 != x0:  # Line1 is not vertical
-        m1 = (y1 - y0) / (x1 - x0)
-        c1 = y0 - m1 * x0
-    else:  # Line1 is vertical
-        m1 = float('inf')  # Infinite slope
-        c1 = x0  # Vertical line's x-coordinate
+#     # Calculate slope (m1) and intercept (c1) of Line1
+#     if x1 != x0:  # Line1 is not vertical
+#         m1 = (y1 - y0) / (x1 - x0)
+#         c1 = y0 - m1 * x0
+#     else:  # Line1 is vertical
+#         m1 = float('inf')  # Infinite slope
+#         c1 = x0  # Vertical line's x-coordinate
 
-    # Intersection with Line2 (y = y_top)
-    if m1 != float('inf'):
-        x_intersect1 = (y_top - c1) / m1
-    else:
-        x_intersect1 = c1  # For vertical Line1
-    intersection1 = (int(round(x_intersect1)), y_top)
+#     # Intersection with Line2 (y = y_top)
+#     if m1 != float('inf'):
+#         x_intersect1 = (y_top - c1) / m1
+#     else:
+#         x_intersect1 = c1  # For vertical Line1
+#     intersection1 = (int(round(x_intersect1)), y_top)
 
-    # Intersection with Line3 (y = y_bottom)
-    if m1 != float('inf'):
-        x_intersect2 = (y_bottom - c1) / m1
-    else:
-        x_intersect2 = c1  # For vertical Line1
-    intersection2 = (int(round(x_intersect2)), y_bottom)
+#     # Intersection with Line3 (y = y_bottom)
+#     if m1 != float('inf'):
+#         x_intersect2 = (y_bottom - c1) / m1
+#     else:
+#         x_intersect2 = c1  # For vertical Line1
+#     intersection2 = (int(round(x_intersect2)), y_bottom)
 
-    return np.asarray([intersection1, intersection2])
+#     return np.asarray([intersection1, intersection2])
 
 def process_results(result, conf, angle):
     transform = np.array([0.01, 0.01, 1])
@@ -216,49 +222,55 @@ def compute_offset(camera, model, fx = 1100 , fy = 1100, z = 30.0):
     #     print("error: ", e)
     #     return None
 
-model = YOLO("studs-seg2.pt")
-camera_ids = find_cam()
-if camera_ids is None:
-    print("no camera detected")
-    assert False
-else:
-    camera = cv2.VideoCapture(camera_ids[-1])
-
-filtered_center = np.array([0,0])
-
-rclpy.init()
-node = rclpy.create_node('tool_offset_publisher')
-tool_offset_pub = node.create_publisher(Float32MultiArray, 'tool_offset', 10)
-
-# Set the loop rate (e.g., 10 Hz)
-rate = node.create_rate(20)
-
-while node.ok():
-    # Get the detected offset
-    offset = compute_offset(camera, model)
-    print(offset)
-    # Publish only if offset is not None
-    # If offset is None (no feature detected), controller's offset isn't updated
-    if offset is not None:
-        # Create a Float32MultiArray message
-        msg = Float32MultiArray()
-        msg.data = offset
-        print("published")
-        # Publish the message
-        tool_offset_pub.publish(msg)
-
-    # Sleep to maintain the loop rate
-    rate.sleep() 
-# while True:
+if __name__ == "__main__":
     
-#     ret, og_frame = camera.read()
-#     h, w, c = og_frame.shape
+    model = YOLO("studs-seg2.pt")
+    camera_ids = find_cam()
+    if camera_ids is None:
+        print("no camera detected")
+        assert False
+    else:
+        camera_id = 2 ## MANUALLY SET ##
+        camera = cv2.VideoCapture(camera_id)
 
-# # Calculate the start and end points for the width dimension to get the middle 480 pixels
-#     start_w = (w - 480) // 2
-#     end_w = start_w + 480
+    filtered_center = np.array([0,0])
 
-#     # Crop the middle section
-#     og_frame = og_frame[:, start_w:end_w, :]
-#     results = model.predict(og_frame, show = True, verbose = False)
-#     process_results(results)
+    rclpy.init()
+    node = rclpy.create_node('tool_offset_publisher')
+    tool_offset_pub = node.create_publisher(Float32MultiArray, 'tool_offset', 10)
+
+    # Set the loop rate (e.g., 10 Hz)
+    rate = node.create_rate(20)
+
+    while node.ok():
+        # Get the detected offset
+        offset = compute_offset(camera, model)
+        print(offset)
+        # Publish only if offset is not None
+        # If offset is None (no feature detected), controller's offset isn't updated
+        if offset is not None:
+            # Create a Float32MultiArray message
+            msg = Float32MultiArray()
+            msg.data = offset
+            print("published")
+            # Publish the message
+            tool_offset_pub.publish(msg)
+
+        # Sleep to maintain the loop rate
+        rate.sleep() 
+        
+        
+        
+    # while True:
+
+    #     ret, og_frame = camera.read()
+    #     h, w, c = og_frame.shape
+
+    # # Calculate the start and end points for the width dimension to get the middle 480 pixels
+    #     start_w = (w - 480) // 2
+    #     end_w = start_w + 480
+
+    #     # Crop the middle section
+    #     og_frame = og_frame[:, start_w:end_w, :]
+    #     results = model.predict(og_frame, show = True, verbose = False)
+    #     process_results(results)
